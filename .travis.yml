@@ -1,4 +1,2 @@
 language: java
-script: 
-	mvn clean verify
-	mvn test -B
+script: "mvn clean verify && mvn test -B"
