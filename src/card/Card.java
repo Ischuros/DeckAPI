@@ -16,6 +16,11 @@ public class Card implements IInteractionTarget
 		properties.add(property);
 	}
 
+	public List<CardPropertyWithValue<?>> getProperties()
+	{
+		return properties;
+	}
+
 	@Override
 	public String toString()
 	{
