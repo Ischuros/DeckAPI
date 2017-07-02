@@ -1,0 +1,13 @@
+#Exclude everything
+/*
+
+#Allow directories
+!/src
+!/test
+
+#Allow special files
+!/.classpath
+!/.project
+!/.travis.yml
+!/.gitignore
+!/pom.xml
