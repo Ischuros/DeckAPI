@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import card.interaction.IInteractionTarget;
-import card.property.CardPropertyWithValue;
+import card.property.CardProperty;
 
 public class Card implements IInteractionTarget
 {
 	private static final long serialVersionUID = 1L;
 
-	private List<CardPropertyWithValue<?>> properties = new ArrayList<>();
+	private List<CardProperty> properties = new ArrayList<>();
 
-	public void addProperty(CardPropertyWithValue<?> property)
+	public void addProperty(CardProperty property)
 	{
 		properties.add(property);
 	}
 
-	public List<CardPropertyWithValue<?>> getProperties()
+	public List<CardProperty> getProperties()
 	{
 		return properties;
 	}

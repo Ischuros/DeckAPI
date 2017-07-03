@@ -1,16 +1,16 @@
 package deck;
 
 import card.Card;
-import card.property.CardPropertyWithValue;
+import card.property.CardPropertyValue;
 
 public class DeckGenerator
 {
 	private Deck deck = new Deck();
 
-	public void generateCard(CardPropertyWithValue<?>... properties)
+	public void generateCard(CardPropertyValue<?>... properties)
 	{
 		Card card = new Card();
-		for (CardPropertyWithValue<?> cardPropertyWithValue : properties)
+		for (CardPropertyValue<?> cardPropertyWithValue : properties)
 		{
 			card.addProperty(cardPropertyWithValue);
 		}
