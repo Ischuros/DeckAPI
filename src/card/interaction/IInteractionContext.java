@@ -1,5 +1,7 @@
 package card.interaction;
 
-public interface IInteractionContext
+import java.io.Serializable;
+
+public interface IInteractionContext extends Serializable
 {
 }
