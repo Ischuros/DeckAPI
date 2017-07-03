@@ -1,7 +1,11 @@
 package card.property;
 
-public class CardPropertyWithValue<T> extends AbstractCardProperty
+import java.io.Serializable;
+
+public class CardPropertyWithValue<T extends Serializable> extends AbstractCardProperty
 {
+	private static final long serialVersionUID = 1L;
+
 	private T value;
 
 	public CardPropertyWithValue(String name, String description, T value)

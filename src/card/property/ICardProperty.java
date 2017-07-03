@@ -1,13 +1,15 @@
 package card.property;
 
+import java.io.Serializable;
+
 /**
  * One of the card property. Such as card name, life, attack, special capacity,
  * ...
  * 
- * @author Lucas
+ * @author Lucas PRANEUF
  *
  */
-public interface ICardProperty
+public interface ICardProperty extends Serializable
 {
 
 	String getName();
