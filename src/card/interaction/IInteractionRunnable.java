@@ -4,17 +4,16 @@ import java.util.List;
 
 public interface IInteractionRunnable
 {
-	public default void run(List<IInteractionContext> circumstances,
-			List<IInteractionTarget> targets) throws PropertyRunnableException
+	public default void run(IInteractionContext context) throws PropertyRunnableException
 	{
-		if (!isAllowToRun(circumstances.toArray(new IInteractionContext[circumstances.size()])))
+		if (!isAllowToRun(context))
 		{
-			throw new PropertyRunnableException(circumstances, targets);
+			throw new PropertyRunnableException(context);
 		}
-		runInternal(targets.toArray(new IInteractionTarget[targets.size()]));
+		runInternal(context.getTargets());
 	}
 
-	boolean isAllowToRun(IInteractionContext... circumstances);
+	boolean isAllowToRun(IInteractionContext context);
 
-	void runInternal(IInteractionTarget... targets);
+	void runInternal(List<IInteractionTarget> targets);
 }

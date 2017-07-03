@@ -1,28 +1,21 @@
 package card.interaction;
 
-import java.util.List;
-
 public class PropertyRunnableException extends Exception
 {
 	private static final long serialVersionUID = 1L;
-	private final List<IInteractionContext> circumstances;
-	private final List<IInteractionTarget> targets;
 
-	public PropertyRunnableException(List<IInteractionContext> circumstances,
-			List<IInteractionTarget> targets)
+	private final IInteractionContext context;
+
+	public PropertyRunnableException(IInteractionContext context)
 	{
-		this.circumstances = circumstances;
-		this.targets = targets;
+		this.context = context;
 	}
 
 	@Override
 	public String getMessage()
 	{
-		StringBuilder sb = new StringBuilder(
-				"Interaction impossible dans les circonstances suivantes :\n");
-		circumstances.forEach(c -> sb.append(c.toString()).append("\n"));
-		sb.append("sur les cibles suivantes :\n");
-		targets.forEach(t -> sb.append(t.toString()).append("\n"));
+		StringBuilder sb = new StringBuilder("Impossible interaction in following context :\n")
+				.append(context.toString());
 		return sb.toString();
 	}
 }
