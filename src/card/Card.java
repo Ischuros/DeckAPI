@@ -9,6 +9,8 @@ import card.property.CardPropertyWithValue;
 
 public class Card implements IInteractionTarget
 {
+	private static final long serialVersionUID = 1L;
+
 	private List<CardPropertyWithValue<?>> properties = new ArrayList<>();
 
 	public void addProperty(CardPropertyWithValue<?> property)
