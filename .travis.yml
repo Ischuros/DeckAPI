@@ -5,8 +5,7 @@ install: true
 addons:
   sonarcloud:
     organization: "ischuros"
-    token:
-          secure: "Mu2TNMVT1hMwyf6vBDshkkzRrezCwiNzH4QrfEohZgU9mfZjUuXX9U0eE+REe1JTbkY+/tqPo9Bn+Ufge5Z2AYJ+zAxzwXQkHBxpKS1xJffmLSK2EN3VrU+QICXwRkLEfdUm+qVMeEDy+AMZtbK/lQdrqtp9omMCQLxwUPLwXC2VDlRo5vHx1itWVw0hgMENEi9Ns9lGUPFwxw9vm5yVX8OXnDRPE1WbIGkvLB5F6VofrqZYe432H3mnuWAz+MtrmjLYUGWMnDH6hvSWZviGfCHGWGVHMtMk3D3pOfj3H/Rs/7gD39/wPcte3wgu97mzwOFp8UY+2ZYFK4A/YZGa015PGTdXxe272FnEyQVaq4kDrC1R46Rph8KJ6AybkJ6iIdglUbMKB1MtT1trTgTxNUUCmnwaKXIxNnyu++/1wF/B/Rdal6eOHfSscMGxR2y7xsaz9Kxt9e0jzcMFE02vngGa5J+RJ13TqQTPwbYDiL/d0noXJBmdSNAPZuRh2m7F/Fd1p7OZ4e9Rf8Pp4NCvESDeQUtsYV483u2F0GyHkQoNjcl4qMUhJzidlyUKrJ2Q7w57dgBxk8WLJkna8ToUYqznC6xPDZNEmFCOhFj8tkLYNTeMhxA0bTtEJrrhTdk3h+HbiX+pKHkWAQmxtkyYuwjhviX65qNAY1kVedMoeWw="
+    token: $SONAR_TOKEN
 jdk:
   - oraclejdk8
 script:
