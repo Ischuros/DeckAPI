@@ -1,3 +1,8 @@
 language: java
-script: "mvn clean verify && mvn test -B"
 jdk: oraclejdk8
+addons:
+  sonarcloud:
+    organization: "ischuros"
+    token:
+      secure: "u5uHGTPV1reiuROL+Ar0LfT+zai/OH+vS8bbfcS3sfrjJiMFdPO3VOVqIDy06jzvHf24UR26MGtvfx7+oi8Ea2kberNhRbOSRSR0WahQKTekSdqn8VIq6tzPLCp9a65Qx5noKyl8lgr7gxuVFnNMJPB3jJ6Wbew+scxWZQc3mN2xrOPkI+QmCKX4+xj2fFaIPLgXFA3rApx7CpGmvvWbOvLLp16BY0BoUSt0ajt7BUIuunPoSTyVmHqdJNEa1ZUiNqa4ueylLRtzTvNMj/Y+1BkG6HkV3c5y12fl2MFhWMKsFwLanvE4aiV9m6xiGChaVQuA0lwKgL+rltuYvMqWnSQh9TDfywJAwXjWM+eUai8gymXW/vtOgqiWOAvd8BfB125PCEMAfWATMCkQHeW6bQ1FRNpO/X6a4chmoXm6TJjWiHGLRqTPEY7slSCQaTqKK8OG8Vai9SV6dIgqyohUdJxAf+ww0RuLXfgw3E2LOPb9WzFj2oMeympnZ77e9ZpTecKjnmKbBfi0j2ncsOBglVJkcjdm7cDS65G3XEy7oZnyTKVYzzWVvWK+eISDHPzMb+oOutyPOVzWle/CcXwenkMkyzcJNAyxlOmNm/PpaZPoKTfPYrh4n2REC6LaOEtFfy8ObJbRN0Df18vn+LRkX7gWXDJhKq7YvHCApR3hTJM="
+script: "mvn clean verify && mvn test -B && mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar"
