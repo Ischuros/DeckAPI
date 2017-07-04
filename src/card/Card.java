@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import card.interaction.IInteractionTarget;
+import card.interaction.IPlayTarget;
 import card.property.CardProperty;
 
-public class Card implements IInteractionTarget
+public class Card implements IPlayTarget
 {
 	private static final long serialVersionUID = 1L;
 

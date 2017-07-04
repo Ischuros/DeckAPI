@@ -1,12 +1,12 @@
 package card.interaction;
 
-public class PropertyRunnableException extends Exception
+public class PlayNotAllowedException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 
-	private final IInteractionContext context;
+	private final IPlayContext context;
 
-	public PropertyRunnableException(IInteractionContext context)
+	public PlayNotAllowedException(IPlayContext context)
 	{
 		this.context = context;
 	}

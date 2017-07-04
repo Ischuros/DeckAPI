@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import card.Card;
-import card.interaction.IInteractionTarget;
+import card.interaction.IPlayTarget;
 
-public class Deck extends LinkedList<Card> implements IInteractionTarget
+public class Deck extends LinkedList<Card> implements IPlayTarget
 {
 	private static final long serialVersionUID = 1L;
 
