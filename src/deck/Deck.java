@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import card.Card;
-import card.interaction.IPlayTarget;
+import card.play.IPlayTarget;
 
 public class Deck extends LinkedList<Card> implements IPlayTarget
 {

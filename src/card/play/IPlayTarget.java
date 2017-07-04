@@ -1,4 +1,4 @@
-package card.interaction;
+package card.play;
 
 import java.io.Serializable;
 

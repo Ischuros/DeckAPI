@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import card.interaction.IPlayTarget;
+import card.play.IPlayTarget;
 import card.property.CardProperty;
 
 public class Card implements IPlayTarget

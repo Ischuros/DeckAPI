@@ -1,4 +1,4 @@
-package card.interaction;
+package card.play;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import card.play.IPlay;
+import card.play.IPlayContext;
+import card.play.IPlayTarget;
+import card.play.PlayNotAllowedException;
 import junit.framework.Assert;
 
 public class IPlayTest
