@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import card.play.AbstractPlay;
+import card.play.IPlayContext;
 import card.play.IPlayTarget;
+import card.play.PlayNotAllowedException;
 import card.property.CardProperty;
 
 public class Card implements IPlayTarget
@@ -21,6 +24,11 @@ public class Card implements IPlayTarget
 	public List<CardProperty> getProperties()
 	{
 		return properties;
+	}
+
+	public void play(AbstractPlay play, IPlayContext context) throws PlayNotAllowedException
+	{
+		play.run(context, properties);
 	}
 
 	@Override
