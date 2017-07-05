@@ -19,13 +19,13 @@ import card.property.CardProperty;
  * @author Lucas PRANEUF
  *
  */
-public abstract class AbstractPlay
+public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterPlayEvent>
 {
 
-	private List<IBeforePlayEvent> beforePlayEvents = new ArrayList<>();
-	private List<IAfterPlayEvent> afterPlayEvents = new ArrayList<>();
-	private Comparator<IBeforePlayEvent> beforePlayComparator;
-	private Comparator<IAfterPlayEvent> afterPlayComparator;
+	private List<T> beforePlayEvents = new ArrayList<>();
+	private List<U> afterPlayEvents = new ArrayList<>();
+	private Comparator<T> beforePlayComparator;
+	private Comparator<U> afterPlayComparator;
 	private Comparator<CardProperty> propertiesComparator;
 
 	public void run(IPlayContext context, List<CardProperty> properties)
@@ -48,22 +48,22 @@ public abstract class AbstractPlay
 		runAfter(context, properties);
 	}
 
-	public void addBeforePlayEvent(IBeforePlayEvent event)
+	public void addBeforePlayEvent(T event)
 	{
 		beforePlayEvents.add(event);
 	}
 
-	public void addAfterPlayEvent(IAfterPlayEvent event)
+	public void addAfterPlayEvent(U event)
 	{
 		afterPlayEvents.add(event);
 	}
 
-	public void setBeforePlayComparator(Comparator<IBeforePlayEvent> beforePlayComparator)
+	public void setBeforePlayComparator(Comparator<T> beforePlayComparator)
 	{
 		this.beforePlayComparator = beforePlayComparator;
 	}
 
-	public void setAfterPlayComparator(Comparator<IAfterPlayEvent> afterPlayComparator)
+	public void setAfterPlayComparator(Comparator<U> afterPlayComparator)
 	{
 		this.afterPlayComparator = afterPlayComparator;
 	}
@@ -75,7 +75,7 @@ public abstract class AbstractPlay
 
 	private void runBefore(IPlayContext context, List<CardProperty> properties)
 	{
-		List<IBeforePlayEvent> events = new ArrayList<>(beforePlayEvents);
+		List<T> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
 		{
 			Collections.sort(events, beforePlayComparator);
@@ -85,7 +85,7 @@ public abstract class AbstractPlay
 
 	private void runAfter(IPlayContext context, List<CardProperty> properties)
 	{
-		List<IAfterPlayEvent> sortedEvents = new ArrayList<>(afterPlayEvents);
+		List<U> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
 		{
 			Collections.sort(sortedEvents, afterPlayComparator);
