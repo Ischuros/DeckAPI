@@ -36,9 +36,9 @@ public class DeckGeneratorTest
 		Deck deck = generator.getDeck();
 
 		Assert.assertEquals(1, deck.size());
-		Assert.assertEquals(1, deck.getFirst().getProperties().size());
+		Assert.assertEquals(1, deck.getFirst().getOrderedProperties().size());
 		Assert.assertEquals(Value.ACE,
-				((CardPropertyValue<Value>) deck.get(0).getProperties().get(0)).getValue());
+				((CardPropertyValue<Value>) deck.get(0).getOrderedProperties().get(0)).getValue());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,14 +53,14 @@ public class DeckGeneratorTest
 		Deck deck = generator.getDeck();
 
 		Assert.assertEquals(3, deck.size());
-		Assert.assertEquals(1, deck.get(0).getProperties().size());
-		Assert.assertEquals(1, deck.get(1).getProperties().size());
-		Assert.assertEquals(1, deck.get(2).getProperties().size());
+		Assert.assertEquals(1, deck.get(0).getOrderedProperties().size());
+		Assert.assertEquals(1, deck.get(1).getOrderedProperties().size());
+		Assert.assertEquals(1, deck.get(2).getOrderedProperties().size());
 		Assert.assertEquals(Value.THREE,
-				((CardPropertyValue<Value>) deck.get(0).getProperties().get(0)).getValue());
+				((CardPropertyValue<Value>) deck.get(0).getOrderedProperties().get(0)).getValue());
 		Assert.assertEquals(Value.FOUR,
-				((CardPropertyValue<Value>) deck.get(1).getProperties().get(0)).getValue());
+				((CardPropertyValue<Value>) deck.get(1).getOrderedProperties().get(0)).getValue());
 		Assert.assertEquals(Value.FIVE,
-				((CardPropertyValue<Value>) deck.get(2).getProperties().get(0)).getValue());
+				((CardPropertyValue<Value>) deck.get(2).getOrderedProperties().get(0)).getValue());
 	}
 }

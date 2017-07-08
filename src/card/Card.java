@@ -20,7 +20,7 @@ public class Card implements IPlayTarget
 		properties.add(property);
 	}
 
-	public List<CardProperty> getProperties()
+	public List<CardProperty> getOrderedProperties()
 	{
 		List<CardProperty> sortedProperties = new ArrayList<>(properties);
 		if (propertyComparator != null)
