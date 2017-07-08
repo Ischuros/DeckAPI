@@ -1,11 +1,9 @@
 package card.event;
 
-import java.util.List;
-
+import card.Card;
 import card.play.IPlayContext;
-import card.property.CardProperty;
 
 public interface IAfterPlayEvent
 {
-	void run(IPlayContext context, List<CardProperty> properties);
+	void run(IPlayContext context, Card cardPlayed);
 }

@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import card.Card;
 import card.event.IAfterPlayEvent;
 import card.event.IBeforePlayEvent;
-import card.property.CardProperty;
 import junit.framework.Assert;
 
 public class AbstractPlayTest
@@ -38,7 +38,7 @@ public class AbstractPlayTest
 		{
 
 			@Override
-			protected void runInternal(IPlayContext context, List<CardProperty> properties)
+			protected void runInternal(IPlayContext context, Card cardPlayed)
 			{
 				sb.append(TEST);
 			}
@@ -55,13 +55,13 @@ public class AbstractPlayTest
 	public void testNotAllowed() throws PlayNotAllowedException
 	{
 		this.allowToRun = false;
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 	}
 
 	@Test
 	public void testRunInternal() throws PlayNotAllowedException
 	{
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 		Assert.assertEquals(TEST, sb.toString());
 	}
 
@@ -70,7 +70,7 @@ public class AbstractPlayTest
 	{
 		final Integer _1 = Integer.valueOf(1);
 		play.addBeforePlayEvent(new IntBeforeEvent(_1.intValue()));
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 
 		Assert.assertEquals(new StringBuilder().append(_1).append(TEST).toString(), sb.toString());
 	}
@@ -81,7 +81,7 @@ public class AbstractPlayTest
 		final Integer _1 = Integer.valueOf(1);
 
 		play.addAfterPlayEvent(new IntAfterEvent(_1.intValue()));
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 
 		Assert.assertEquals(new StringBuilder().append(TEST).append(_1).toString(), sb.toString());
 	}
@@ -100,7 +100,7 @@ public class AbstractPlayTest
 
 		play.setBeforePlayComparator(Comparator.comparingInt(IntBeforeEvent::getValue).reversed());
 
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 		Assert.assertEquals(new StringBuilder().append(_30).append(_20).append(_10).append(_1)
 				.append(TEST).toString(), sb.toString());
 	}
@@ -119,7 +119,7 @@ public class AbstractPlayTest
 
 		play.setAfterPlayComparator(Comparator.comparingInt(IntAfterEvent::getValue).reversed());
 
-		play.run(context, new ArrayList<>());
+		play.run(context, new Card());
 		Assert.assertEquals(
 				new StringBuilder(TEST).append(_30).append(_20).append(_10).append(_1).toString(),
 				sb.toString());
@@ -135,7 +135,7 @@ public class AbstractPlayTest
 		}
 
 		@Override
-		public void run(IPlayContext context, List<CardProperty> properties)
+		public void run(IPlayContext context, Card cardPlayed)
 		{
 			Assert.assertEquals(AbstractPlayTest.this.context, context);
 			sb.append("" + value);
@@ -157,7 +157,7 @@ public class AbstractPlayTest
 		}
 
 		@Override
-		public void run(IPlayContext context, List<CardProperty> properties)
+		public void run(IPlayContext context, Card cardPlayed)
 		{
 			Assert.assertEquals(AbstractPlayTest.this.context, context);
 			sb.append("" + value);

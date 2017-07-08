@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import card.Card;
 import card.event.IAfterPlayEvent;
 import card.event.IBeforePlayEvent;
-import card.property.CardProperty;
 
 /**
  * Represents a play. To perform a play, we need a context and card properties.
@@ -26,26 +26,17 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 	private List<U> afterPlayEvents = new ArrayList<>();
 	private Comparator<T> beforePlayComparator;
 	private Comparator<U> afterPlayComparator;
-	private Comparator<CardProperty> propertiesComparator;
 
-	public void run(IPlayContext context, List<CardProperty> properties)
-			throws PlayNotAllowedException
+	public void run(IPlayContext context, Card cardPlayed) throws PlayNotAllowedException
 	{
 		if (!isAllowToRun(context))
 		{
 			throw new PlayNotAllowedException(context);
 		}
 
-		runBefore(context, properties);
-
-		List<CardProperty> sortedProperties = new ArrayList<>(properties);
-		if (propertiesComparator != null)
-		{
-			Collections.sort(sortedProperties, propertiesComparator);
-		}
-		runInternal(context, sortedProperties);
-
-		runAfter(context, properties);
+		runBefore(context, cardPlayed);
+		runInternal(context, cardPlayed);
+		runAfter(context, cardPlayed);
 	}
 
 	public void addBeforePlayEvent(T event)
@@ -68,32 +59,27 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 		this.afterPlayComparator = afterPlayComparator;
 	}
 
-	public void setPropertiesComparator(Comparator<CardProperty> propertiesComparator)
-	{
-		this.propertiesComparator = propertiesComparator;
-	}
-
-	private void runBefore(IPlayContext context, List<CardProperty> properties)
+	private void runBefore(IPlayContext context, Card cardPlayed)
 	{
 		List<T> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
 		{
 			Collections.sort(events, beforePlayComparator);
 		}
-		events.forEach(event -> event.run(context, properties));
+		events.forEach(event -> event.run(context, cardPlayed));
 	}
 
-	private void runAfter(IPlayContext context, List<CardProperty> properties)
+	private void runAfter(IPlayContext context, Card cardPlayed)
 	{
 		List<U> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
 		{
 			Collections.sort(sortedEvents, afterPlayComparator);
 		}
-		sortedEvents.forEach(event -> event.run(context, properties));
+		sortedEvents.forEach(event -> event.run(context, cardPlayed));
 	}
 
 	protected abstract boolean isAllowToRun(IPlayContext context);
 
-	protected abstract void runInternal(IPlayContext context, List<CardProperty> properties);
+	protected abstract void runInternal(IPlayContext context, Card cardPlayed);
 }
