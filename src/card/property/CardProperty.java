@@ -1,9 +1,7 @@
 package card.property;
 
-public class CardProperty implements ICardProperty
+public abstract class CardProperty
 {
-	private static final long serialVersionUID = 1L;
-
 	private String name;
 	private String description;
 
@@ -13,13 +11,11 @@ public class CardProperty implements ICardProperty
 		this.description = description;
 	}
 
-	@Override
 	public String getName()
 	{
 		return this.name;
 	}
 
-	@Override
 	public String getDescription()
 	{
 		return this.description;

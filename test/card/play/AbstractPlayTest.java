@@ -26,7 +26,6 @@ public class AbstractPlayTest
 		this.sb = new StringBuilder();
 		this.context = new IPlayContext()
 		{
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public List<IPlayTarget> getTargets()

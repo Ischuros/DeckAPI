@@ -1,38 +1,27 @@
 package card;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import card.play.IPlayTarget;
 import card.property.CardProperty;
+import card.property.ComparableCardProperty;
 
 public class Card implements IPlayTarget
 {
-	private static final long serialVersionUID = 1L;
-
 	private List<CardProperty> properties = new ArrayList<>();
-	private CardPropertyComparator propertyComparator;
 
 	public void addProperty(CardProperty property)
 	{
 		properties.add(property);
 	}
 
-	public List<CardProperty> getOrderedProperties()
+	public List<ComparableCardProperty<?>> getOrderedProperties()
 	{
-		List<CardProperty> sortedProperties = new ArrayList<>(properties);
-		if (propertyComparator != null)
-		{
-			Collections.sort(sortedProperties, propertyComparator);
-		}
-		return sortedProperties;
-	}
-
-	public void setPropertyComparator(CardPropertyComparator propertyComparator)
-	{
-		this.propertyComparator = propertyComparator;
+		return properties.stream().filter(p -> p instanceof ComparableCardProperty)
+				.map(p -> (ComparableCardProperty<?>) p).sorted().collect(Collectors.toList());
 	}
 
 	@Override

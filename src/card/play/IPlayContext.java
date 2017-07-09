@@ -1,9 +1,8 @@
 package card.play;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface IPlayContext extends Serializable
+public interface IPlayContext
 {
 	List<IPlayTarget> getTargets();
 }
