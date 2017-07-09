@@ -4,7 +4,7 @@ public class PlayNotAllowedException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 
-	private final IPlayContext context;
+	private final transient IPlayContext context;
 
 	public PlayNotAllowedException(IPlayContext context)
 	{
