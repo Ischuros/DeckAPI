@@ -42,11 +42,28 @@ public class CardTest
 				((IntCardProperty) card.getOrderedProperties().get(2)).getValue().intValue());
 	}
 
+	@Test
+	public void testComparatorDifferentProperties()
+	{
+		card.addProperty(new IntCardProperty(30));
+		card.addProperty(new FloatCardProperty(10));
+
+		Assert.assertEquals(2, card.getOrderedProperties().size());
+	}
+
 	private final class IntCardProperty extends ValueCardProperty<Integer>
 	{
 		public IntCardProperty(int value)
 		{
-			super(new SimpleProperty("Value", "Value"), Integer.valueOf(value));
+			super(new SimpleProperty("Integer value", "Integer value"), Integer.valueOf(value));
+		}
+	}
+
+	private final class FloatCardProperty extends ValueCardProperty<Float>
+	{
+		public FloatCardProperty(float value)
+		{
+			super(new SimpleProperty("Float value", "Float value"), Float.valueOf(value));
 		}
 	}
 }
