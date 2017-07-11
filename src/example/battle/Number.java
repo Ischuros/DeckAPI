@@ -1,6 +1,6 @@
-package example.classic;
+package example.battle;
 
-public enum Value
+public enum Number
 {
 	ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING;
 }

@@ -1,6 +1,6 @@
 package card.property;
 
-public abstract class CardProperty
+abstract class CardProperty
 {
 	private String name;
 	private String description;

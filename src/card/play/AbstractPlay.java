@@ -19,7 +19,7 @@ import card.event.IBeforePlayEvent;
  * @author Lucas PRANEUF
  *
  */
-public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterPlayEvent>
+public abstract class AbstractPlay<P extends Comparable<P>, T extends IBeforePlayEvent<P>, U extends IAfterPlayEvent<P>>
 {
 
 	private List<T> beforePlayEvents = new ArrayList<>();
@@ -27,7 +27,7 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 	private Comparator<T> beforePlayComparator;
 	private Comparator<U> afterPlayComparator;
 
-	public void run(IPlayContext context, Card cardPlayed) throws PlayNotAllowedException
+	public void run(IPlayContext context, Card<P> cardPlayed) throws PlayNotAllowedException
 	{
 		if (!isAllowToRun(context))
 		{
@@ -59,7 +59,7 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 		this.afterPlayComparator = afterPlayComparator;
 	}
 
-	private void runBefore(IPlayContext context, Card cardPlayed)
+	private void runBefore(IPlayContext context, Card<P> cardPlayed)
 	{
 		List<T> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
@@ -69,7 +69,7 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 		events.forEach(event -> event.run(context, cardPlayed));
 	}
 
-	private void runAfter(IPlayContext context, Card cardPlayed)
+	private void runAfter(IPlayContext context, Card<P> cardPlayed)
 	{
 		List<U> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
@@ -81,5 +81,5 @@ public abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterP
 
 	protected abstract boolean isAllowToRun(IPlayContext context);
 
-	protected abstract void runInternal(IPlayContext context, Card cardPlayed);
+	protected abstract void runInternal(IPlayContext context, Card<P> cardPlayed);
 }

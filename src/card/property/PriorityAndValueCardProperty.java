@@ -1,6 +1,6 @@
 package card.property;
 
-public class PriorityAndValueCardProperty<P extends Comparable<P>, V extends Comparable<V>>
+public abstract class PriorityAndValueCardProperty<P extends Comparable<P>, V extends Comparable<V>>
 		extends ComparableCardProperty<PriorityAndValueCardProperty<P, V>>
 {
 	private P priority;
@@ -8,7 +8,12 @@ public class PriorityAndValueCardProperty<P extends Comparable<P>, V extends Com
 
 	public PriorityAndValueCardProperty(CardProperty property, P priority, V value)
 	{
-		super(property.getName(), property.getDescription());
+		this(property.getName(), property.getDescription(), priority, value);
+	}
+
+	public PriorityAndValueCardProperty(String name, String description, P priority, V value)
+	{
+		super(name, description);
 		this.priority = priority;
 		this.value = value;
 	}
@@ -29,7 +34,17 @@ public class PriorityAndValueCardProperty<P extends Comparable<P>, V extends Com
 		int priorityCompare = getPriority().compareTo(o.getPriority());
 		if (priorityCompare == 0)
 		{
-			return getValue().compareTo(o.getValue());
+			int valueCompare = getValue().compareTo(o.getValue());
+			if (valueCompare == 0)
+			{
+				int nameCompare = getName().compareTo(o.getName());
+				if (nameCompare == 0)
+				{
+					return getDescription().compareTo(o.getDescription());
+				}
+				return nameCompare;
+			}
+			return valueCompare;
 		}
 		return priorityCompare;
 	}

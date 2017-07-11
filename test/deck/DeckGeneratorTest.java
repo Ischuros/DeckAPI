@@ -5,25 +5,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 import card.property.SimpleProperty;
-import card.property.ValueCardProperty;
-import example.classic.Value;
+import card.property.ValueProperty;
+import example.battle.Number;
 
 public class DeckGeneratorTest
 {
 	private SimpleProperty valueProperty;
-	private ValueCardProperty<Value> ace;
-	private ValueCardProperty<Value> three;
-	private ValueCardProperty<Value> four;
-	private ValueCardProperty<Value> five;
+	private ValueProperty<Number> ace;
+	private ValueProperty<Number> three;
+	private ValueProperty<Number> four;
+	private ValueProperty<Number> five;
 
 	@Before
 	public void before()
 	{
 		this.valueProperty = new SimpleProperty("Value", "Card value");
-		this.ace = new ValueCardProperty<Value>(valueProperty, Value.ACE);
-		this.three = new ValueCardProperty<Value>(valueProperty, Value.THREE);
-		this.four = new ValueCardProperty<Value>(valueProperty, Value.FOUR);
-		this.five = new ValueCardProperty<Value>(valueProperty, Value.FIVE);
+		this.ace = new ValueProperty<Number>(valueProperty, Number.ACE);
+		this.three = new ValueProperty<Number>(valueProperty, Number.THREE);
+		this.four = new ValueProperty<Number>(valueProperty, Number.FOUR);
+		this.five = new ValueProperty<Number>(valueProperty, Number.FIVE);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,8 +37,8 @@ public class DeckGeneratorTest
 
 		Assert.assertEquals(1, deck.size());
 		Assert.assertEquals(1, deck.getFirst().getProperties().size());
-		Assert.assertEquals(Value.ACE,
-				((ValueCardProperty<Value>) deck.get(0).getProperties().get(0)).getValue());
+		Assert.assertEquals(Number.ACE,
+				((ValueProperty<Number>) deck.get(0).getProperties().get(0)).getValue());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,11 +56,11 @@ public class DeckGeneratorTest
 		Assert.assertEquals(1, deck.get(0).getProperties().size());
 		Assert.assertEquals(1, deck.get(1).getProperties().size());
 		Assert.assertEquals(1, deck.get(2).getProperties().size());
-		Assert.assertEquals(Value.THREE,
-				((ValueCardProperty<Value>) deck.get(0).getProperties().get(0)).getValue());
-		Assert.assertEquals(Value.FOUR,
-				((ValueCardProperty<Value>) deck.get(1).getProperties().get(0)).getValue());
-		Assert.assertEquals(Value.FIVE,
-				((ValueCardProperty<Value>) deck.get(2).getProperties().get(0)).getValue());
+		Assert.assertEquals(Number.THREE,
+				((ValueProperty<Number>) deck.get(0).getProperties().get(0)).getValue());
+		Assert.assertEquals(Number.FOUR,
+				((ValueProperty<Number>) deck.get(1).getProperties().get(0)).getValue());
+		Assert.assertEquals(Number.FIVE,
+				((ValueProperty<Number>) deck.get(2).getProperties().get(0)).getValue());
 	}
 }

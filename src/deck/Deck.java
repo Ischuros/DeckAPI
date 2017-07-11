@@ -9,11 +9,11 @@ import java.util.StringJoiner;
 import card.Card;
 import card.play.IPlayTarget;
 
-public class Deck extends LinkedList<Card> implements IPlayTarget
+public class Deck<P extends Comparable<P>> extends LinkedList<Card<P>> implements IPlayTarget
 {
 	private static final long serialVersionUID = 1L;
 
-	public Deck shuflle()
+	public Deck<P> shuflle()
 	{
 		Collections.shuffle(this);
 		return this;
@@ -27,12 +27,12 @@ public class Deck extends LinkedList<Card> implements IPlayTarget
 	 * @param nbDecks
 	 *            Number of decks to split this deck
 	 */
-	public List<Deck> splitInequalParts(int nbDecks)
+	public List<Deck<P>> splitInequalParts(int nbDecks)
 	{
-		List<Deck> decks = new ArrayList<>();
+		List<Deck<P>> decks = new ArrayList<>();
 		for (int i = 0; i < nbDecks; i++)
 		{
-			decks.add(new Deck());
+			decks.add(new Deck<>());
 		}
 		for (int i = 0; i < size(); i++)
 		{

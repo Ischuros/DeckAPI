@@ -4,35 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 import card.play.IPlayTarget;
-import card.property.CardProperty;
 import card.property.PriorityAndValueCardProperty;
+import card.property.PriorityComparator;
 
-public class Card implements IPlayTarget
+public class Card<P extends Comparable<P>> implements IPlayTarget
 {
-	private List<CardProperty> properties = new ArrayList<>();
+	private List<PriorityAndValueCardProperty<P, ?>> properties = new ArrayList<>();
 
-	public void addProperty(CardProperty property)
+	public void addProperty(PriorityAndValueCardProperty<P, ?> property)
 	{
 		properties.add(property);
 	}
 
-	public List<CardProperty> getProperties()
+	public List<PriorityAndValueCardProperty<P, ?>> getPriorityOrderedProperties()
 	{
-		return properties;
-	}
-
-	public List<PriorityAndValueCardProperty> getOrderedProperties()
-	{
-		// TODO : to complete
-		List<PriorityAndValueCardProperty> priorities = properties.stream()
-				.filter(p -> p instanceof PriorityAndValueCardProperty)
-				.map(p -> (PriorityAndValueCardProperty) p).collect(Collectors.toList());
-
-		Collections.sort(priorities);
-		return priorities;
+		List<PriorityAndValueCardProperty<P, ?>> orderedProperties = new ArrayList<>(properties);
+		Collections.sort(orderedProperties, new PriorityComparator<>());
+		return orderedProperties;
 	}
 
 	@Override
@@ -42,4 +32,5 @@ public class Card implements IPlayTarget
 		properties.forEach(p -> sj.add(p.toString()));
 		return sj.toString();
 	}
+
 }

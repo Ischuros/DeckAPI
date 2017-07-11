@@ -1,4 +1,4 @@
-package example.classic;
+package example.battle;
 
 public enum Symbol
 {

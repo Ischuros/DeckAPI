@@ -1,24 +1,47 @@
 package deck;
 
 import card.Card;
-import card.property.CardProperty;
+import card.property.PriorityAndValueCardProperty;
 
-public class DeckGenerator
+public final class DeckGenerator<P extends Comparable<P>>
 {
-	private Deck deck = new Deck();
+	private Deck<P> deck = new Deck<>();
 
-	public void generateCard(CardProperty... properties)
+	public CardAdder start()
 	{
-		Card card = new Card();
-		for (CardProperty cardProperty : properties)
-		{
-			card.addProperty(cardProperty);
-		}
-		deck.add(card);
+		return new CardAdder();
 	}
 
-	public Deck getDeck()
+	public Deck<P> getDeck()
 	{
 		return deck;
 	}
+
+	public final class CardAdder
+	{
+		private Card<P> card;
+
+		public CardAdder()
+		{
+			this.card = new Card<>();
+			deck.add(card);
+		}
+
+		public CardAdder addProperty(PriorityAndValueCardProperty<P, ?> property)
+		{
+			card.addProperty(property);
+			return this;
+		}
+
+		public CardAdder addCard()
+		{
+			return new CardAdder();
+		}
+
+		public DeckGenerator<P> finish()
+		{
+			return DeckGenerator.this;
+		}
+	}
+
 }
