@@ -10,7 +10,7 @@ import example.battle.Number;
 
 public class DeckGeneratorTest
 {
-	private SimpleProperty valueProperty;
+	private SimpleProperty property;
 	private ValueProperty<Number> ace;
 	private ValueProperty<Number> three;
 	private ValueProperty<Number> four;
@@ -19,48 +19,40 @@ public class DeckGeneratorTest
 	@Before
 	public void before()
 	{
-		this.valueProperty = new SimpleProperty("Value", "Card value");
-		this.ace = new ValueProperty<Number>(valueProperty, Number.ACE);
-		this.three = new ValueProperty<Number>(valueProperty, Number.THREE);
-		this.four = new ValueProperty<Number>(valueProperty, Number.FOUR);
-		this.five = new ValueProperty<Number>(valueProperty, Number.FIVE);
+		this.property = new SimpleProperty("Value", "Card value");
+		this.ace = new ValueProperty<Number>(property, Number.ACE);
+		this.three = new ValueProperty<Number>(property, Number.THREE);
+		this.four = new ValueProperty<Number>(property, Number.FOUR);
+		this.five = new ValueProperty<Number>(property, Number.FIVE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGenerateCard()
 	{
-		DeckGenerator generator = new DeckGenerator();
-		generator.generateCard(ace);
-
-		Deck deck = generator.getDeck();
+		Deck<Integer> deck = new DeckGenerator<Integer>().start().addCard().addProperty(ace)
+				.finish().getDeck();
 
 		Assert.assertEquals(1, deck.size());
-		Assert.assertEquals(1, deck.getFirst().getProperties().size());
+		Assert.assertEquals(1, deck.getFirst().getPriorityOrderedProperties().size());
 		Assert.assertEquals(Number.ACE,
-				((ValueProperty<Number>) deck.get(0).getProperties().get(0)).getValue());
+				deck.get(0).getPriorityOrderedProperties().get(0).getValue());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGenerateSeveralCards()
 	{
-		DeckGenerator generator = new DeckGenerator();
-		generator.generateCard(three);
-		generator.generateCard(four);
-		generator.generateCard(five);
-
-		Deck deck = generator.getDeck();
+		Deck<Integer> deck = new DeckGenerator<Integer>().start().addCard().addProperty(three)
+				.addCard().addProperty(four).addCard().addProperty(five).finish().getDeck();
 
 		Assert.assertEquals(3, deck.size());
-		Assert.assertEquals(1, deck.get(0).getProperties().size());
-		Assert.assertEquals(1, deck.get(1).getProperties().size());
-		Assert.assertEquals(1, deck.get(2).getProperties().size());
+		Assert.assertEquals(1, deck.get(0).getPriorityOrderedProperties().size());
+		Assert.assertEquals(1, deck.get(1).getPriorityOrderedProperties().size());
+		Assert.assertEquals(1, deck.get(2).getPriorityOrderedProperties().size());
 		Assert.assertEquals(Number.THREE,
-				((ValueProperty<Number>) deck.get(0).getProperties().get(0)).getValue());
+				deck.get(0).getPriorityOrderedProperties().get(0).getValue());
 		Assert.assertEquals(Number.FOUR,
-				((ValueProperty<Number>) deck.get(1).getProperties().get(0)).getValue());
+				deck.get(1).getPriorityOrderedProperties().get(0).getValue());
 		Assert.assertEquals(Number.FIVE,
-				((ValueProperty<Number>) deck.get(2).getProperties().get(0)).getValue());
+				deck.get(2).getPriorityOrderedProperties().get(0).getValue());
 	}
 }

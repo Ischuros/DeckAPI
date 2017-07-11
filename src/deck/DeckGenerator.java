@@ -21,12 +21,6 @@ public final class DeckGenerator<P extends Comparable<P>>
 	{
 		private Card<P> card;
 
-		public CardAdder()
-		{
-			this.card = new Card<>();
-			deck.add(card);
-		}
-
 		public CardAdder addProperty(PriorityAndValueCardProperty<P, ?> property)
 		{
 			card.addProperty(property);
@@ -35,7 +29,9 @@ public final class DeckGenerator<P extends Comparable<P>>
 
 		public CardAdder addCard()
 		{
-			return new CardAdder();
+			this.card = new Card<>();
+			deck.add(card);
+			return this;
 		}
 
 		public DeckGenerator<P> finish()
