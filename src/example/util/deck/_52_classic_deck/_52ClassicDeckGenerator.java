@@ -1,16 +1,21 @@
-package example.battle;
+package example.util.deck._52_classic_deck;
 
 import deck.Deck;
 import deck.DeckGenerator;
+import example.util.deck._52_classic_deck.property.ClassicPriority;
+import example.util.deck._52_classic_deck.property.Number;
+import example.util.deck._52_classic_deck.property.NumberProperty;
+import example.util.deck._52_classic_deck.property.Symbol;
+import example.util.deck._52_classic_deck.property.SymbolProperty;
 
-public class BattleDeckGenerator
+public class _52ClassicDeckGenerator
 {
-	private BattleDeckGenerator()
+	private _52ClassicDeckGenerator()
 	{
 		
 	}
 
-	public static Deck<BattlePriority> getDeck()
+	public static Deck<ClassicPriority> getDeck()
 	{
 		SymbolProperty club = new SymbolProperty(Symbol.CLUB);
 		SymbolProperty diamond = new SymbolProperty(Symbol.DIAMOND);
@@ -31,7 +36,7 @@ public class BattleDeckGenerator
 		NumberProperty queen = new NumberProperty(Number.QUEEN);
 		NumberProperty king = new NumberProperty(Number.KING);
 
-		return new DeckGenerator<BattlePriority>().start()
+		return new DeckGenerator<ClassicPriority>().start()
 		.addCard().addProperty(club).addProperty(ace)
 		.addCard().addProperty(club).addProperty(two)
 		.addCard().addProperty(club).addProperty(three)

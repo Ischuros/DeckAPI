@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import card.property.SimpleProperty;
 import card.property.ValueProperty;
-import example.battle.Number;
+import example.util.deck._52_classic_deck.property.Number;
 
 public class DeckGeneratorTest
 {
