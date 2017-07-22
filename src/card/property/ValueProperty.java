@@ -4,7 +4,7 @@ public class ValueProperty<V extends Comparable<V>> extends PriorityAndValueCard
 {
 	public ValueProperty(CardProperty property, V value)
 	{
-		super(property, Integer.valueOf(0), value);
+		super(property, Integer.valueOf(Integer.MIN_VALUE), value);
 	}
 
 }

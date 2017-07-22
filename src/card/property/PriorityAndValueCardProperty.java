@@ -34,19 +34,29 @@ public abstract class PriorityAndValueCardProperty<P extends Comparable<P>, V ex
 		int priorityCompare = getPriority().compareTo(o.getPriority());
 		if (priorityCompare == 0)
 		{
-			int valueCompare = getValue().compareTo(o.getValue());
-			if (valueCompare == 0)
-			{
-				int nameCompare = getName().compareTo(o.getName());
-				if (nameCompare == 0)
-				{
-					return getDescription().compareTo(o.getDescription());
-				}
-				return nameCompare;
-			}
-			return valueCompare;
+			return compareValue(o);
 		}
 		return priorityCompare;
+	}
+
+	private int compareValue(PriorityAndValueCardProperty<P, V> o)
+	{
+		int valueCompare = getValue().compareTo(o.getValue());
+		if (valueCompare == 0)
+		{
+			return compareName(o);
+		}
+		return valueCompare;
+	}
+
+	private int compareName(PriorityAndValueCardProperty<P, V> o)
+	{
+		int nameCompare = getName().compareTo(o.getName());
+		if (nameCompare == 0)
+		{
+			return getDescription().compareTo(o.getDescription());
+		}
+		return nameCompare;
 	}
 
 }
