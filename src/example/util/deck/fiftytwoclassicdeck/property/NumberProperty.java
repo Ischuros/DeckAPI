@@ -1,4 +1,4 @@
-package example.util.deck._52_classic_deck.property;
+package example.util.deck.fiftytwoclassicdeck.property;
 
 import card.property.PriorityAndValueCardProperty;
 import card.property.SimpleProperty;

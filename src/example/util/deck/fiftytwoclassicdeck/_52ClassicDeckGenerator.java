@@ -1,12 +1,12 @@
-package example.util.deck._52_classic_deck;
+package example.util.deck.fiftytwoclassicdeck;
 
 import deck.Deck;
 import deck.DeckGenerator;
-import example.util.deck._52_classic_deck.property.ClassicPriority;
-import example.util.deck._52_classic_deck.property.Number;
-import example.util.deck._52_classic_deck.property.NumberProperty;
-import example.util.deck._52_classic_deck.property.Symbol;
-import example.util.deck._52_classic_deck.property.SymbolProperty;
+import example.util.deck.fiftytwoclassicdeck.property.ClassicPriority;
+import example.util.deck.fiftytwoclassicdeck.property.Number;
+import example.util.deck.fiftytwoclassicdeck.property.NumberProperty;
+import example.util.deck.fiftytwoclassicdeck.property.Symbol;
+import example.util.deck.fiftytwoclassicdeck.property.SymbolProperty;
 
 public class _52ClassicDeckGenerator
 {

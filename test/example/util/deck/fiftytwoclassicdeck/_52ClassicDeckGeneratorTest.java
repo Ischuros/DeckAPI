@@ -1,4 +1,4 @@
-package example.util.deck._52_classic_deck;
+package example.util.deck.fiftytwoclassicdeck;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import deck.Deck;
-import example.util.deck._52_classic_deck._52ClassicDeckGenerator;
-import example.util.deck._52_classic_deck.property.ClassicPriority;
+import example.util.deck.fiftytwoclassicdeck._52ClassicDeckGenerator;
+import example.util.deck.fiftytwoclassicdeck.property.ClassicPriority;
 
 public class _52ClassicDeckGeneratorTest
 {
