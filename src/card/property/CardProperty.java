@@ -2,6 +2,7 @@ package card.property;
 
 abstract class CardProperty
 {
+
 	private String name;
 	private String description;
 

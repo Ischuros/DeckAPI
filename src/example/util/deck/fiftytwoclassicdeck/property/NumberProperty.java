@@ -1,9 +1,9 @@
 package example.util.deck.fiftytwoclassicdeck.property;
 
-import card.property.PriorityAndValueCardProperty;
 import card.property.SimpleProperty;
+import card.property.ValueCardProperty;
 
-public class NumberProperty extends PriorityAndValueCardProperty<ClassicPriority, Number>
+public class NumberProperty extends ValueCardProperty<ClassicPriority, Number>
 {
 	private static final SimpleProperty NUMBER_SIMPLE_PROPERTY = new SimpleProperty("Value",
 			"Card value : from ace to king");

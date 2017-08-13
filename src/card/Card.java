@@ -6,22 +6,25 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import card.play.IPlayTarget;
-import card.property.PriorityAndValueCardProperty;
-import card.property.PriorityComparator;
+import card.property.IllegalPriorityException;
+import card.property.PropertyChecker;
+import card.property.ValueCardProperty;
 
 public class Card<P extends Comparable<P>> implements IPlayTarget
 {
-	private List<PriorityAndValueCardProperty<P, ?>> properties = new ArrayList<>();
+	private List<ValueCardProperty<P, ?>> properties = new ArrayList<>();
 
-	public void addProperty(PriorityAndValueCardProperty<P, ?> property)
+	public void addProperty(ValueCardProperty<P, ?> property)
 	{
 		properties.add(property);
 	}
 
-	public List<PriorityAndValueCardProperty<P, ?>> getPriorityOrderedProperties()
+	public List<ValueCardProperty<P, ?>> getPriorityOrderedProperties()
+			throws IllegalPriorityException
 	{
-		List<PriorityAndValueCardProperty<P, ?>> orderedProperties = new ArrayList<>(properties);
-		Collections.sort(orderedProperties, new PriorityComparator<>());
+		PropertyChecker.checkProperties(properties);
+		List<ValueCardProperty<P, ?>> orderedProperties = new ArrayList<>(properties);
+		Collections.sort(orderedProperties);
 		return orderedProperties;
 	}
 

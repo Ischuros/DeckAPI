@@ -1,6 +1,6 @@
 package card.property;
 
-public class SimpleProperty extends PriorityAndValueCardProperty<Integer, Integer>
+public class SimpleProperty extends ValueCardProperty<Integer, Integer>
 {
 
 	public SimpleProperty(String name, String description)

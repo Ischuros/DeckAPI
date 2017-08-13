@@ -8,9 +8,9 @@ import example.util.deck.fiftytwoclassicdeck.property.NumberProperty;
 import example.util.deck.fiftytwoclassicdeck.property.Symbol;
 import example.util.deck.fiftytwoclassicdeck.property.SymbolProperty;
 
-public class _52ClassicDeckGenerator
+public class FiftyTwoClassicDeckGenerator
 {
-	private _52ClassicDeckGenerator()
+	private FiftyTwoClassicDeckGenerator()
 	{
 		
 	}

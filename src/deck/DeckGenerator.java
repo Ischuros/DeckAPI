@@ -1,7 +1,7 @@
 package deck;
 
 import card.Card;
-import card.property.PriorityAndValueCardProperty;
+import card.property.ValueCardProperty;
 
 public final class DeckGenerator<P extends Comparable<P>>
 {
@@ -21,7 +21,7 @@ public final class DeckGenerator<P extends Comparable<P>>
 	{
 		private Card<P> card;
 
-		public CardAdder addProperty(PriorityAndValueCardProperty<P, ?> property)
+		public CardAdder addProperty(ValueCardProperty<P, ?> property)
 		{
 			card.addProperty(property);
 			return this;
