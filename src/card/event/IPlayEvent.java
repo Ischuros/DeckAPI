@@ -1,9 +1,8 @@
 package card.event;
 
-import card.Card;
 import card.play.IPlayContext;
 
-public interface IPlayEvent
+public interface IPlayEvent<C extends IPlayContext>
 {
-	void run(IPlayContext context, Card cardPlayed);
+	void run(C context);
 }

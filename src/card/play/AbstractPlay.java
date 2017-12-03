@@ -17,7 +17,7 @@ import card.event.IPlayEvent;
  * @author Lucas PRANEUF
  *
  */
-abstract class AbstractPlay<T extends IPlayEvent, U extends IPlayEvent>
+public abstract class AbstractPlay<T extends IPlayEvent, U extends IPlayEvent, C extends IPlayContext>
 {
 
 	private final List<T> beforePlayEvents = new ArrayList<>();
@@ -25,16 +25,16 @@ abstract class AbstractPlay<T extends IPlayEvent, U extends IPlayEvent>
 	private Comparator<T> beforePlayComparator;
 	private Comparator<U> afterPlayComparator;
 
-	public void run(IPlayContext context, Card cardPlayed) throws PlayNotAllowedException
+	public void run(C context) throws PlayNotAllowedException
 	{
 		if (!isAllowToRun(context))
 		{
 			throw new PlayNotAllowedException(context);
 		}
 
-		runBefore(context, cardPlayed);
-		runInternal(context, cardPlayed);
-		runAfter(context, cardPlayed);
+		runBefore(context);
+		runInternal(context);
+		runAfter(context);
 	}
 
 	public void addBeforePlayEvent(T event)
@@ -57,27 +57,27 @@ abstract class AbstractPlay<T extends IPlayEvent, U extends IPlayEvent>
 		this.afterPlayComparator = afterPlayComparator;
 	}
 
-	private void runBefore(IPlayContext context, Card cardPlayed)
+	private void runBefore(C context)
 	{
 		List<T> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
 		{
 			events.sort(beforePlayComparator);
 		}
-		events.forEach(event -> event.run(context, cardPlayed));
+		events.forEach(event -> event.run(context));
 	}
 
-	private void runAfter(IPlayContext context, Card cardPlayed)
+	private void runAfter(C context)
 	{
 		List<U> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
 		{
 			sortedEvents.sort(afterPlayComparator);
 		}
-		sortedEvents.forEach(event -> event.run(context, cardPlayed));
+		sortedEvents.forEach(event -> event.run(context));
 	}
 
-	protected abstract boolean isAllowToRun(IPlayContext context);
+	protected abstract boolean isAllowToRun(C context);
 
-	protected abstract void runInternal(IPlayContext context, Card cardPlayed);
+	protected abstract void runInternal(C context);
 }
