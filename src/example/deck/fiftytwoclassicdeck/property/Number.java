@@ -1,4 +1,4 @@
-package example.util.deck.fiftytwoclassicdeck.property;
+package example.deck.fiftytwoclassicdeck.property;
 
 public enum Number
 {

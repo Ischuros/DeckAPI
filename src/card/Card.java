@@ -19,7 +19,7 @@ public class Card implements IPlayTarget
 	@Override
 	public String toString()
 	{
-		StringJoiner sj = new StringJoiner(" | ");
+		StringJoiner sj = new StringJoiner(" ");
 		properties.forEach(p -> sj.add(p.toString()));
 		return sj.toString();
 	}

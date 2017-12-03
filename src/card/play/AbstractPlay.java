@@ -5,8 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import card.Card;
-import card.event.IAfterPlayEvent;
-import card.event.IBeforePlayEvent;
+import card.event.IPlayEvent;
 
 /**
  * Represents a play. To perform a play, we need a context and card properties.
@@ -18,7 +17,7 @@ import card.event.IBeforePlayEvent;
  * @author Lucas PRANEUF
  *
  */
-abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterPlayEvent>
+abstract class AbstractPlay<T extends IPlayEvent, U extends IPlayEvent>
 {
 
 	private final List<T> beforePlayEvents = new ArrayList<>();

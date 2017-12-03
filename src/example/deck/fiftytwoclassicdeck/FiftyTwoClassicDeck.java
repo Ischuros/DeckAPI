@@ -1,20 +1,20 @@
-package example.util.deck.fiftytwoclassicdeck;
+package example.deck.fiftytwoclassicdeck;
 
 import deck.Deck;
 import deck.DeckGenerator;
-import example.util.deck.fiftytwoclassicdeck.property.Number;
-import example.util.deck.fiftytwoclassicdeck.property.NumberProperty;
-import example.util.deck.fiftytwoclassicdeck.property.Symbol;
-import example.util.deck.fiftytwoclassicdeck.property.SymbolProperty;
+import example.deck.fiftytwoclassicdeck.property.Number;
+import example.deck.fiftytwoclassicdeck.property.NumberProperty;
+import example.deck.fiftytwoclassicdeck.property.Symbol;
+import example.deck.fiftytwoclassicdeck.property.SymbolProperty;
 
-class FiftyTwoClassicDeckGenerator
+class FiftyTwoClassicDeck extends Deck
 {
-	private FiftyTwoClassicDeckGenerator()
+	FiftyTwoClassicDeck()
 	{
-		
+		this.addAll(buildDeck());
 	}
 
-	public static Deck getDeck()
+	private static Deck buildDeck()
 	{
 		SymbolProperty club = new SymbolProperty(Symbol.CLUB);
 		SymbolProperty diamond = new SymbolProperty(Symbol.DIAMOND);

@@ -44,7 +44,7 @@ public class Deck extends LinkedList<Card> implements IPlayTarget
 	@Override
 	public String toString()
 	{
-		StringJoiner sj = new StringJoiner("\n");
+		StringJoiner sj = new StringJoiner(System.lineSeparator());
 		forEach(c -> sj.add(c.toString()));
 		return sj.toString();
 	}

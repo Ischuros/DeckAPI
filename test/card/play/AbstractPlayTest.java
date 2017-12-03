@@ -1,8 +1,7 @@
 package card.play;
 
 import card.Card;
-import card.event.IAfterPlayEvent;
-import card.event.IBeforePlayEvent;
+import card.event.IPlayEvent;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -116,7 +115,7 @@ public class AbstractPlayTest
 				sb.toString());
 	}
 
-	private final class IntBeforeEvent implements IBeforePlayEvent
+	private final class IntBeforeEvent implements IPlayEvent
 	{
 		private final int value;
 
@@ -138,7 +137,7 @@ public class AbstractPlayTest
 		}
 	}
 
-	private final class IntAfterEvent implements IAfterPlayEvent
+	private final class IntAfterEvent implements IPlayEvent
 	{
 		private final int value;
 

@@ -17,4 +17,9 @@ public abstract class ValueCardProperty<V extends Comparable<V>>
     public int compareTo(V o) {
         return value.compareTo(o);
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }
