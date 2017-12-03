@@ -13,7 +13,7 @@ public class Deck extends LinkedList<Card> implements IPlayTarget
 {
 	private static final long serialVersionUID = 1L;
 
-	public Deck shuflle()
+	public Deck shuffle()
 	{
 		Collections.shuffle(this);
 		return this;
@@ -21,13 +21,13 @@ public class Deck extends LinkedList<Card> implements IPlayTarget
 
 	/**
 	 * Split the deck into smaller decks. These smaller decks have not
-	 * necessarily the same size. For instance a 52 cards deck splitted in 3 do
+	 * necessarily the same size. For instance a 52 cards deck split in 3 do
 	 * not have the same size.
 	 * 
 	 * @param nbDecks
 	 *            Number of decks to split this deck
 	 */
-	public List<Deck> splitInequalParts(int nbDecks)
+	public List<Deck> splitUnequalParts(int nbDecks)
 	{
 		List<Deck> decks = new ArrayList<>();
 		for (int i = 0; i < nbDecks; i++)

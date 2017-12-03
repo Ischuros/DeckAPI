@@ -1,6 +1,6 @@
 package card.property;
 
-public class IllegalPriorityException extends Exception
+class IllegalPriorityException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 

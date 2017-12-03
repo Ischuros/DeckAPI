@@ -4,7 +4,7 @@ public abstract class ValueCardProperty<V extends Comparable<V>>
         extends ComparableCardProperty<V> {
     private final V value;
 
-    public ValueCardProperty(String name, String description, V value) {
+    protected ValueCardProperty(String name, String description, V value) {
         super(name, description);
         this.value = value;
     }

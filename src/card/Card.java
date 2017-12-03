@@ -1,12 +1,10 @@
 package card;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
 import card.play.IPlayTarget;
-import card.property.IllegalPriorityException;
 import card.property.ValueCardProperty;
 
 public class Card implements IPlayTarget
