@@ -19,15 +19,15 @@ import card.event.IBeforePlayEvent;
  * @author Lucas PRANEUF
  *
  */
-public abstract class AbstractPlay<P extends Comparable<P>, T extends IBeforePlayEvent<P>, U extends IAfterPlayEvent<P>>
+abstract class AbstractPlay<T extends IBeforePlayEvent, U extends IAfterPlayEvent>
 {
 
-	private List<T> beforePlayEvents = new ArrayList<>();
-	private List<U> afterPlayEvents = new ArrayList<>();
+	private final List<T> beforePlayEvents = new ArrayList<>();
+	private final List<U> afterPlayEvents = new ArrayList<>();
 	private Comparator<T> beforePlayComparator;
 	private Comparator<U> afterPlayComparator;
 
-	public void run(IPlayContext context, Card<P> cardPlayed) throws PlayNotAllowedException
+	public void run(IPlayContext context, Card cardPlayed) throws PlayNotAllowedException
 	{
 		if (!isAllowToRun(context))
 		{
@@ -59,27 +59,27 @@ public abstract class AbstractPlay<P extends Comparable<P>, T extends IBeforePla
 		this.afterPlayComparator = afterPlayComparator;
 	}
 
-	private void runBefore(IPlayContext context, Card<P> cardPlayed)
+	private void runBefore(IPlayContext context, Card cardPlayed)
 	{
 		List<T> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
 		{
-			Collections.sort(events, beforePlayComparator);
+			events.sort(beforePlayComparator);
 		}
 		events.forEach(event -> event.run(context, cardPlayed));
 	}
 
-	private void runAfter(IPlayContext context, Card<P> cardPlayed)
+	private void runAfter(IPlayContext context, Card cardPlayed)
 	{
 		List<U> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
 		{
-			Collections.sort(sortedEvents, afterPlayComparator);
+			sortedEvents.sort(afterPlayComparator);
 		}
 		sortedEvents.forEach(event -> event.run(context, cardPlayed));
 	}
 
 	protected abstract boolean isAllowToRun(IPlayContext context);
 
-	protected abstract void runInternal(IPlayContext context, Card<P> cardPlayed);
+	protected abstract void runInternal(IPlayContext context, Card cardPlayed);
 }

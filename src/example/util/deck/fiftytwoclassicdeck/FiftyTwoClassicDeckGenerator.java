@@ -2,20 +2,19 @@ package example.util.deck.fiftytwoclassicdeck;
 
 import deck.Deck;
 import deck.DeckGenerator;
-import example.util.deck.fiftytwoclassicdeck.property.ClassicPriority;
 import example.util.deck.fiftytwoclassicdeck.property.Number;
 import example.util.deck.fiftytwoclassicdeck.property.NumberProperty;
 import example.util.deck.fiftytwoclassicdeck.property.Symbol;
 import example.util.deck.fiftytwoclassicdeck.property.SymbolProperty;
 
-public class FiftyTwoClassicDeckGenerator
+class FiftyTwoClassicDeckGenerator
 {
 	private FiftyTwoClassicDeckGenerator()
 	{
 		
 	}
 
-	public static Deck<ClassicPriority> getDeck()
+	public static Deck getDeck()
 	{
 		SymbolProperty club = new SymbolProperty(Symbol.CLUB);
 		SymbolProperty diamond = new SymbolProperty(Symbol.DIAMOND);
@@ -36,7 +35,7 @@ public class FiftyTwoClassicDeckGenerator
 		NumberProperty queen = new NumberProperty(Number.QUEEN);
 		NumberProperty king = new NumberProperty(Number.KING);
 
-		return new DeckGenerator<ClassicPriority>().start()
+		return new DeckGenerator().start()
 		.addCard().addProperty(club).addProperty(ace)
 		.addCard().addProperty(club).addProperty(two)
 		.addCard().addProperty(club).addProperty(three)

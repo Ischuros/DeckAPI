@@ -3,21 +3,21 @@ package card.property;
 abstract class CardProperty
 {
 
-	private String name;
-	private String description;
+	private final String name;
+	private final String description;
 
-	public CardProperty(String name, String description)
+	CardProperty(String name, String description)
 	{
 		this.name = name;
 		this.description = description;
 	}
 
-	public String getName()
+	String getName()
 	{
 		return this.name;
 	}
 
-	public String getDescription()
+	String getDescription()
 	{
 		return this.description;
 	}

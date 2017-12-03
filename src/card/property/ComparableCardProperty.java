@@ -1,12 +1,11 @@
 package card.property;
 
-abstract class ComparableCardProperty<T extends ComparableCardProperty<T>> extends CardProperty
+abstract class ComparableCardProperty<T extends Comparable<T>> extends CardProperty
 		implements Comparable<T>
 {
 
-	public ComparableCardProperty(String name, String description)
+	ComparableCardProperty(String name, String description)
 	{
 		super(name, description);
 	}
-
 }

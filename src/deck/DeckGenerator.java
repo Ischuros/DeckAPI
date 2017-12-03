@@ -3,25 +3,25 @@ package deck;
 import card.Card;
 import card.property.ValueCardProperty;
 
-public final class DeckGenerator<P extends Comparable<P>>
+public final class DeckGenerator
 {
-	private Deck<P> deck = new Deck<>();
+	private final Deck deck = new Deck();
 
 	public CardAdder start()
 	{
 		return new CardAdder();
 	}
 
-	public Deck<P> getDeck()
+	public Deck getDeck()
 	{
 		return deck;
 	}
 
 	public final class CardAdder
 	{
-		private Card<P> card;
+		private Card card;
 
-		public CardAdder addProperty(ValueCardProperty<P, ?> property)
+		public CardAdder addProperty(ValueCardProperty<? extends Comparable<?>> property)
 		{
 			card.addProperty(property);
 			return this;
@@ -29,12 +29,12 @@ public final class DeckGenerator<P extends Comparable<P>>
 
 		public CardAdder addCard()
 		{
-			this.card = new Card<>();
+			this.card = new Card();
 			deck.add(card);
 			return this;
 		}
 
-		public DeckGenerator<P> finish()
+		public DeckGenerator finish()
 		{
 			return DeckGenerator.this;
 		}

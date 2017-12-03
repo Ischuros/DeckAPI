@@ -7,9 +7,8 @@ public class IllegalPriorityException extends Exception
 	@Override
 	public String getMessage()
 	{
-		StringBuilder sb = new StringBuilder("Incompatible property comparison. Properties "
-				+ " have same priority but have different value types.");
-		return sb.toString();
+		return "Incompatible property comparison. Properties "
+				+ " have same priority but have different value types.";
 	}
 
 }

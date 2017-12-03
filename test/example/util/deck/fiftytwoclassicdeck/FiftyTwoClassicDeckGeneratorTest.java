@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import deck.Deck;
-import example.util.deck.fiftytwoclassicdeck.FiftyTwoClassicDeckGenerator;
-import example.util.deck.fiftytwoclassicdeck.property.ClassicPriority;
 
 public class FiftyTwoClassicDeckGeneratorTest
 {
@@ -18,9 +16,9 @@ public class FiftyTwoClassicDeckGeneratorTest
 	}
 
 	@Test
-	public void testDeckSplittedIn2()
+	public void testDeckSplitIn2()
 	{
-		List<Deck<ClassicPriority>> smallerDecks = FiftyTwoClassicDeckGenerator.getDeck()
+		List<Deck> smallerDecks = FiftyTwoClassicDeckGenerator.getDeck()
 				.splitInequalParts(2);
 
 		Assert.assertEquals(2, smallerDecks.size());
