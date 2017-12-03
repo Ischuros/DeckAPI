@@ -19,7 +19,7 @@ public class FiftyTwoClassicDeckGeneratorTest
 	public void testDeckSplitIn2()
 	{
 		List<Deck> smallerDecks = FiftyTwoClassicDeckGenerator.getDeck()
-				.splitInequalParts(2);
+				.splitUnequalParts(2);
 
 		Assert.assertEquals(2, smallerDecks.size());
 		Assert.assertEquals(26, smallerDecks.get(0).size());
