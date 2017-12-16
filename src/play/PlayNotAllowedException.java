@@ -1,12 +1,14 @@
-package card.play;
+package play;
 
-class PlayNotAllowedException extends Exception
+import game.Game;
+
+public class PlayNotAllowedException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 
-	private final transient IPlayContext context;
+	private final transient Game context;
 
-	PlayNotAllowedException(IPlayContext context)
+	PlayNotAllowedException(Game context)
 	{
 		this.context = context;
 	}

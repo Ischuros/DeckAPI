@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import card.Card;
-import card.play.IPlayTarget;
 
-public class Deck extends LinkedList<Card> implements IPlayTarget
-{
+public class Deck extends LinkedList<Card> {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Shuffle the deck.
+	 * @return the deck shuffled
+	 */
 	public Deck shuffle()
 	{
 		Collections.shuffle(this);

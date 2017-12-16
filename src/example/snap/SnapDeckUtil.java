@@ -7,8 +7,7 @@ import java.util.List;
 
 public class SnapDeckUtil {
 
-    public static boolean isSnap(SnapPlayContext context) {
-        Deck toCheck = SnapDeckUtil.getLastCards(context.getOnBoardCards(), context.getNbPlayers());
+    public static boolean isSnap(SnapGame context) {
 
         //TODO
         return false;

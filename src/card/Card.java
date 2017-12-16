@@ -1,17 +1,15 @@
 package card;
 
+import card.property.CardProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import card.play.IPlayTarget;
-import card.property.ValueCardProperty;
+public class Card {
+	private final List<CardProperty> properties = new ArrayList<>();
 
-public class Card implements IPlayTarget
-{
-	private final List<ValueCardProperty<? extends Comparable<?>>> properties = new ArrayList<>();
-
-	public <T extends ValueCardProperty<? extends Comparable<?>>> void addProperty(T property)
+	public void addProperty(CardProperty property)
 	{
 		properties.add(property);
 	}

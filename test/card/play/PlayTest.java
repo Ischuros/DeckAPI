@@ -1,19 +1,20 @@
 package card.play;
 
-import card.event.IPlayEvent;
+import card.event.PlayEvent;
+import game.Game;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import play.Play;
+import play.PlayNotAllowedException;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
-public class AbstractPlayTest
+public class PlayTest
 {
 	private static final String TEST = "test";
-	private IntPlayContext context;
-	private AbstractPlay<IntBeforeEvent, IntAfterEvent, IntPlayContext> play;
+	private IntPlayGame context;
+	private Play<IntBeforeEvent, IntAfterEvent, IntPlayGame> play;
     private StringBuilder sb;
 	private boolean allowToRun = true;
 
@@ -21,18 +22,18 @@ public class AbstractPlayTest
 	public void before()
 	{
 		this.sb = new StringBuilder();
-        this.context = new IntPlayContext();
-		this.play = new AbstractPlay<IntBeforeEvent, IntAfterEvent, IntPlayContext>()
+        this.context = new IntPlayGame();
+		this.play = new Play<IntBeforeEvent, IntAfterEvent, IntPlayGame>()
 		{
 
 			@Override
-			protected void runInternal(IntPlayContext context)
+			protected void runInternal(IntPlayGame context)
 			{
 				sb.append(TEST);
 			}
 
 			@Override
-			protected boolean isAllowToRun(IntPlayContext context)
+			protected boolean isAllowToRun(IntPlayGame context)
 			{
 				return allowToRun;
 			}
@@ -113,7 +114,7 @@ public class AbstractPlayTest
 				sb.toString());
 	}
 
-	private final class IntBeforeEvent implements IPlayEvent
+	private final class IntBeforeEvent implements PlayEvent<IntPlayGame>
 	{
 		private final int value;
 
@@ -123,9 +124,9 @@ public class AbstractPlayTest
 		}
 
 		@Override
-		public void run(IPlayContext context)
+		public void run(IntPlayGame game)
 		{
-			Assert.assertEquals(AbstractPlayTest.this.context, context);
+			Assert.assertEquals(PlayTest.this.context, game);
 			sb.append("").append(value);
 		}
 
@@ -135,7 +136,7 @@ public class AbstractPlayTest
 		}
 	}
 
-	private final class IntAfterEvent implements IPlayEvent<IntPlayContext>
+	private final class IntAfterEvent implements PlayEvent<IntPlayGame>
 	{
 		private final int value;
 
@@ -145,9 +146,9 @@ public class AbstractPlayTest
 		}
 
 		@Override
-		public void run(IntPlayContext context)
+		public void run(IntPlayGame game)
 		{
-			Assert.assertEquals(AbstractPlayTest.this.context, context);
+			Assert.assertEquals(PlayTest.this.context, game);
 			sb.append("").append(value);
 		}
 
@@ -157,11 +158,7 @@ public class AbstractPlayTest
 		}
 	}
 
-	private final class IntPlayContext implements IPlayContext{
+	private final class IntPlayGame extends Game {
 
-		@Override
-		public List<? extends IPlayTarget> getTargets() {
-			return new ArrayList<>();
-		}
 	}
 }

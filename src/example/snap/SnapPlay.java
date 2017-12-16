@@ -1,21 +1,17 @@
 package example.snap;
 
-import card.Card;
-import card.play.AbstractPlay;
-import deck.Deck;
+import card.event.EmptyEvent;
+import play.Play;
 
-public class SnapPlay extends AbstractPlay<SnapBeforePlayEvent, SnapAfterPlayEvent, SnapPlayContext> {
+public class SnapPlay extends Play<EmptyEvent<SnapGame>, EmptyEvent<SnapGame>, SnapGame> {
 
     @Override
-    protected boolean isAllowToRun(SnapPlayContext context) {
+    protected boolean isAllowToRun(SnapGame context) {
         return true;
     }
 
     @Override
-    protected void runInternal(SnapPlayContext context) {
-        final Deck deckToBePlayed = context.getDeckToBePlayed();
-        Card playedCard = deckToBePlayed.getFirst();
-        deckToBePlayed.remove(playedCard);
-        context.getOnBoardCards().add(playedCard);
+    protected void runInternal(SnapGame context) {
+        //TODO
     }
 }

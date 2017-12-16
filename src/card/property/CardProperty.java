@@ -1,6 +1,6 @@
 package card.property;
 
-abstract class CardProperty
+public abstract class CardProperty
 {
 
 	private final String name;
