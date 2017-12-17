@@ -10,33 +10,84 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class Game
-{
-	private Board board = new Board();
-	private List<Player> players = new ArrayList<>();
-	private Player playerToPlay;
-	private List<Play> plays = new ArrayList<>();
+public abstract class Game<P extends Player, B extends Board, T extends Turn<P>> {
+	private B board;
+	private List<P> players = new ArrayList<>();
+	private List<T> historicTurns = new ArrayList<>();
+	private T currentTurn;
 
-	public void registerPlayers(Player... players) {
+	public Game(B board) {
+		this.board = board;
+	}
+
+	public void registerPlayers(P... players) {
 		Collections.addAll(this.players, players);
 	}
 
-	public void sortPlayers(Comparator<Player> comparator) {
+	public void sortPlayers(Comparator<P> comparator) {
 		players.sort(comparator);
 	}
 
-	public void play(Player player, Play play) throws PlayNotAllowedException, WrongPlayerPlaying {
-		if (!player.equals(playerToPlay)) {
-			throw new WrongPlayerPlaying(player);
+	public void play(Play play) throws GameOverException, PlayNotAllowedException,
+			TurnOverException, WrongPlayerPlayingException {
+		if (isOver()) {
+			throw new GameOverException();
 		}
 
-		play.run(this);
-		plays.add(play);
-		setNextPlayerToPlay();
+		playCurrentTurn(play);
 	}
 
-	private void setNextPlayerToPlay() {
-		int nextIndex = players.indexOf(playerToPlay) == players.size()-1 ? 0 : players.indexOf(playerToPlay)+1;
-		playerToPlay = players.get(nextIndex);
+	private void playCurrentTurn(Play play) throws WrongPlayerPlayingException, TurnOverException,
+			PlayNotAllowedException {
+		if (currentTurn == null) {
+			currentTurn = createNewTurn();
+		}
+
+		if (currentTurn.isOver()) {
+			historicTurns.add(currentTurn);
+			currentTurn = createNewTurn();
+		}
+
+		currentTurn.play(play);
 	}
+
+	public P getCurrentPlayer() {
+		if (currentTurn == null) {
+			return players.iterator().next();
+		}
+
+		return currentTurn.getPlayerToPlay();
+	}
+
+	/**
+	 * @param player Player to exclude
+	 * @return a list of all players, excluding the one passed in parameter;
+	 */
+	public List<P> getOtherPlayers(P player) {
+		List<P> otherPlayers = new ArrayList<>(players);
+		otherPlayers.remove(player);
+		return otherPlayers;
+	}
+
+	public B getBoard() {
+		return board;
+	}
+
+	public List<P> getPlayers() {
+		return players;
+	}
+
+	public P getWinner() throws GameNotOverException {
+		if (!isOver()) {
+			throw new GameNotOverException();
+		}
+
+		return getInternalWinner();
+	}
+
+	public abstract boolean isOver();
+
+	protected abstract P getInternalWinner();
+
+	protected abstract T createNewTurn();
 }

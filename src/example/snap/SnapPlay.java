@@ -1,17 +1,24 @@
 package example.snap;
 
-import card.event.EmptyEvent;
+import card.Card;
 import play.Play;
 
-public class SnapPlay extends Play<EmptyEvent<SnapGame>, EmptyEvent<SnapGame>, SnapGame> {
+import java.util.List;
 
-    @Override
-    protected boolean isAllowToRun(SnapGame context) {
-        return true;
+public class SnapPlay extends Play<SnapBoard, SnapPlayer> {
+
+	public SnapPlay(SnapPlayer player) {
+		super(player);
+	}
+
+	@Override
+    protected boolean isAllowToRun(SnapBoard board, List<SnapPlayer> otherPlayers) {
+        return !player.getDeck().isEmpty();
     }
 
     @Override
-    protected void runInternal(SnapGame context) {
-        //TODO
+    protected void runInternal(SnapBoard board, List<SnapPlayer> otherPlayers) {
+        Card cardToPlay = player.getDeck().removeFirst();
+        board.playCard(cardToPlay, player);
     }
 }

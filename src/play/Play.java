@@ -1,11 +1,10 @@
 package play;
 
+import card.event.PlayEvent;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import card.event.PlayEvent;
-import game.Game;
 
 /**
  * Represents a play. To perform a play, we need a context and card properties.
@@ -17,67 +16,75 @@ import game.Game;
  * @author Lucas PRANEUF
  *
  */
-public abstract class Play<B extends PlayEvent<G>, A extends PlayEvent<G>, G extends Game>
+public abstract class Play<B extends Board, P extends Player>
 {
+	private final List<PlayEvent<B, P>> beforePlayEvents = new ArrayList<>();
+	private final List<PlayEvent<B, P>> afterPlayEvents = new ArrayList<>();
+	private Comparator<PlayEvent<B, P>> beforePlayComparator;
+	private Comparator<PlayEvent<B, P>> afterPlayComparator;
+	protected P player;
 
-	private final List<B> beforePlayEvents = new ArrayList<>();
-	private final List<A> afterPlayEvents = new ArrayList<>();
-	private Comparator<B> beforePlayComparator;
-	private Comparator<A> afterPlayComparator;
-
-	public void run(G game) throws PlayNotAllowedException
-	{
-		if (!isAllowToRun(game))
-		{
-			throw new PlayNotAllowedException(game);
-		}
-
-		runBefore(game);
-		runInternal(game);
-		runAfter(game);
+	public Play(P player) {
+		this.player = player;
 	}
 
-	public void addBeforePlayEvent(B event)
+	public void run(B board, List<P> otherPlayers) throws PlayNotAllowedException
+	{
+		if (!isAllowToRun(board, otherPlayers))
+		{
+			throw new PlayNotAllowedException();
+		}
+
+		runBefore(board, otherPlayers);
+		runInternal(board, otherPlayers);
+		runAfter(board, otherPlayers);
+	}
+
+	public void addBeforePlayEvent(PlayEvent<B, P> event)
 	{
 		beforePlayEvents.add(event);
 	}
 
-	public void addAfterPlayEvent(A event)
+	public void addAfterPlayEvent(PlayEvent<B, P> event)
 	{
 		afterPlayEvents.add(event);
 	}
 
-	public void setBeforePlayComparator(Comparator<B> beforePlayComparator)
+	public void setBeforePlayComparator(Comparator<PlayEvent<B, P>> beforePlayComparator)
 	{
 		this.beforePlayComparator = beforePlayComparator;
 	}
 
-	public void setAfterPlayComparator(Comparator<A> afterPlayComparator)
+	public void setAfterPlayComparator(Comparator<PlayEvent<B, P>> afterPlayComparator)
 	{
 		this.afterPlayComparator = afterPlayComparator;
 	}
 
-	private void runBefore(G game)
+	private void runBefore(B board, List<P> otherPlayers)
 	{
-		List<B> events = new ArrayList<>(beforePlayEvents);
+		List<PlayEvent<B, P>> events = new ArrayList<>(beforePlayEvents);
 		if (beforePlayComparator != null)
 		{
 			events.sort(beforePlayComparator);
 		}
-		events.forEach(event -> event.run(game));
+		events.forEach(event -> event.run(board, player, otherPlayers));
 	}
 
-	private void runAfter(G game)
+	private void runAfter(B board, List<P> otherPlayers)
 	{
-		List<A> sortedEvents = new ArrayList<>(afterPlayEvents);
+		List<PlayEvent<B, P>> sortedEvents = new ArrayList<>(afterPlayEvents);
 		if (afterPlayComparator != null)
 		{
 			sortedEvents.sort(afterPlayComparator);
 		}
-		sortedEvents.forEach(event -> event.run(game));
+		sortedEvents.forEach(event -> event.run(board, player, otherPlayers));
 	}
 
-	protected abstract boolean isAllowToRun(G context);
+	public P getPlayer() {
+		return player;
+	}
 
-	protected abstract void runInternal(G context);
+	protected abstract boolean isAllowToRun(B board, List<P> otherPlayers);
+
+	protected abstract void runInternal(B board, List<P> otherPlayers);
 }

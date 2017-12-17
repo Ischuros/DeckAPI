@@ -5,7 +5,7 @@ import card.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public abstract class Board {
 
     private List<CardPlayerLink> cards = new ArrayList<>();
 
