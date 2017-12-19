@@ -1,13 +1,12 @@
 package game;
 
-import turn.Turn;
-import turn.TurnOverException;
 import play.Play;
 import play.PlayNotAllowedException;
 import play.Player;
+import turn.Turn;
+import turn.TurnOverException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
