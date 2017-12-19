@@ -21,8 +21,8 @@ public abstract class Game<B extends Board, P extends Player, T extends Turn<B, 
 		this.board = board;
 	}
 
-	public void registerPlayers(P... players) {
-		Collections.addAll(this.players, players);
+	public void registerPlayers(List<P> playersToRegister) {
+		this.players.addAll(playersToRegister);
 	}
 
 	public void sortPlayers(Comparator<P> comparator) {
