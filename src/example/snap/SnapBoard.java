@@ -1,6 +1,6 @@
 package example.snap;
 
-import play.Board;
+import game.Board;
 
 public class SnapBoard extends Board {
 }

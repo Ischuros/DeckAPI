@@ -1,6 +1,7 @@
-package play;
+package game;
 
 import card.Card;
+import play.Player;
 
 import java.util.ArrayList;
 import java.util.List;

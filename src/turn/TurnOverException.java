@@ -1,4 +1,4 @@
-package game;
+package turn;
 
 public class TurnOverException extends Exception {
 

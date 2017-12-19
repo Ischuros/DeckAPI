@@ -1,11 +1,11 @@
-package card.event;
+package event;
 
-import play.Board;
+import game.Board;
 import play.Player;
 
 import java.util.List;
 
-public interface PlayEvent<B extends Board, P extends Player>
+public interface Event<B extends Board, P extends Player>
 {
 	void run(B board, P playerToPlay, List<P> otherPlayers);
 }

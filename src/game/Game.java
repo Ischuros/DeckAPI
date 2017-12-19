@@ -1,6 +1,7 @@
 package game;
 
-import play.Board;
+import turn.Turn;
+import turn.TurnOverException;
 import play.Play;
 import play.PlayNotAllowedException;
 import play.Player;
@@ -10,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class Game<P extends Player, B extends Board, T extends Turn<P>> {
+public abstract class Game<B extends Board, P extends Player, T extends Turn<B, P>> {
 	private B board;
 	private List<P> players = new ArrayList<>();
 	private List<T> historicTurns = new ArrayList<>();
@@ -28,7 +29,7 @@ public abstract class Game<P extends Player, B extends Board, T extends Turn<P>>
 		players.sort(comparator);
 	}
 
-	public void play(Play play) throws GameOverException, PlayNotAllowedException,
+	public void play(Play<B, P> play) throws GameOverException, PlayNotAllowedException,
 			TurnOverException, WrongPlayerPlayingException {
 		if (isOver()) {
 			throw new GameOverException();
@@ -37,7 +38,7 @@ public abstract class Game<P extends Player, B extends Board, T extends Turn<P>>
 		playCurrentTurn(play);
 	}
 
-	private void playCurrentTurn(Play play) throws WrongPlayerPlayingException, TurnOverException,
+	private void playCurrentTurn(Play<B, P> play) throws WrongPlayerPlayingException, TurnOverException,
 			PlayNotAllowedException {
 		if (currentTurn == null) {
 			currentTurn = createNewTurn();
@@ -57,16 +58,6 @@ public abstract class Game<P extends Player, B extends Board, T extends Turn<P>>
 		}
 
 		return currentTurn.getPlayerToPlay();
-	}
-
-	/**
-	 * @param player Player to exclude
-	 * @return a list of all players, excluding the one passed in parameter;
-	 */
-	public List<P> getOtherPlayers(P player) {
-		List<P> otherPlayers = new ArrayList<>(players);
-		otherPlayers.remove(player);
-		return otherPlayers;
 	}
 
 	public B getBoard() {

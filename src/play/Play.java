@@ -1,9 +1,8 @@
 package play;
 
-import card.event.PlayEvent;
+import event.BaseEvent;
+import game.Board;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -16,12 +15,8 @@ import java.util.List;
  * @author Lucas PRANEUF
  *
  */
-public abstract class Play<B extends Board, P extends Player>
+public abstract class Play<B extends Board, P extends Player> extends BaseEvent<B, P>
 {
-	private final List<PlayEvent<B, P>> beforePlayEvents = new ArrayList<>();
-	private final List<PlayEvent<B, P>> afterPlayEvents = new ArrayList<>();
-	private Comparator<PlayEvent<B, P>> beforePlayComparator;
-	private Comparator<PlayEvent<B, P>> afterPlayComparator;
 	protected P player;
 
 	public Play(P player) {
@@ -35,49 +30,9 @@ public abstract class Play<B extends Board, P extends Player>
 			throw new PlayNotAllowedException();
 		}
 
-		runBefore(board, otherPlayers);
+		runBefore(board, player, otherPlayers);
 		runInternal(board, otherPlayers);
-		runAfter(board, otherPlayers);
-	}
-
-	public void addBeforePlayEvent(PlayEvent<B, P> event)
-	{
-		beforePlayEvents.add(event);
-	}
-
-	public void addAfterPlayEvent(PlayEvent<B, P> event)
-	{
-		afterPlayEvents.add(event);
-	}
-
-	public void setBeforePlayComparator(Comparator<PlayEvent<B, P>> beforePlayComparator)
-	{
-		this.beforePlayComparator = beforePlayComparator;
-	}
-
-	public void setAfterPlayComparator(Comparator<PlayEvent<B, P>> afterPlayComparator)
-	{
-		this.afterPlayComparator = afterPlayComparator;
-	}
-
-	private void runBefore(B board, List<P> otherPlayers)
-	{
-		List<PlayEvent<B, P>> events = new ArrayList<>(beforePlayEvents);
-		if (beforePlayComparator != null)
-		{
-			events.sort(beforePlayComparator);
-		}
-		events.forEach(event -> event.run(board, player, otherPlayers));
-	}
-
-	private void runAfter(B board, List<P> otherPlayers)
-	{
-		List<PlayEvent<B, P>> sortedEvents = new ArrayList<>(afterPlayEvents);
-		if (afterPlayComparator != null)
-		{
-			sortedEvents.sort(afterPlayComparator);
-		}
-		sortedEvents.forEach(event -> event.run(board, player, otherPlayers));
+		runAfter(board, player, otherPlayers);
 	}
 
 	public P getPlayer() {

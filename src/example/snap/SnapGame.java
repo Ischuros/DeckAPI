@@ -1,8 +1,9 @@
 package example.snap;
 
 import game.Game;
+import turn.Turn;
 
-public class SnapGame extends Game<SnapPlayer, SnapBoard, SnapTurn> {
+public class SnapGame extends Game<SnapBoard, SnapPlayer, Turn<SnapBoard, SnapPlayer>> {
 
 	public SnapGame(SnapBoard board) {
 		super(board);
@@ -19,7 +20,8 @@ public class SnapGame extends Game<SnapPlayer, SnapBoard, SnapTurn> {
 	}
 
 	@Override
-	protected SnapTurn createNewTurn() {
-		return new SnapTurn(this);
+	protected Turn<SnapBoard, SnapPlayer> createNewTurn() {
+		return null;
 	}
+
 }
